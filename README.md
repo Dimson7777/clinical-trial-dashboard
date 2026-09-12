@@ -1,6 +1,6 @@
 # Clinical Trial Data Dashboard & API Platform
 
-A modern, production-grade full-stack platform for clinical research teams to manage trial participants, track study arm distribution (treatment vs. control), monitor participant statuses (active, completed, withdrawn), and analyze real-time cohort demographics.
+A modern full-stack clinical trial dashboard built as an interview-ready first version for managing trial participants, monitoring study metrics, and demonstrating a clean API-centric architecture.
 
 ---
 
@@ -49,7 +49,7 @@ flowchart TD
 | Layer | Technology | Version | Rationale |
 |---|---|---|---|
 | **Frontend Framework** | React + TypeScript | 18.3.1 / 5.7 | Component modularity, robust hook lifecycle, compile-time type safety matching backend schemas. |
-| **Frontend Tooling** | Vite | 6.0.5 | Ultra-fast Hot Module Replacement (HMR) and optimized Rollup-based production builds. |
+| **Frontend Tooling** | Vite | 6.0.5 | Fast Hot Module Replacement (HMR) and optimized Rollup-based production builds. |
 | **Routing** | React Router | 6.28.1 | Declarative client-side routing, protected navigation guards, authentication redirects. |
 | **UI Styling & Icons** | Vanilla CSS + Lucide React | 0.469.0 | Clean, lightweight, professional dashboard design system without heavy framework dependencies. |
 | **Backend API** | FastAPI | 0.115.6 | Fast ASGI framework with native async support, automatic OpenAPI/Swagger docs, and Pydantic validation. |
@@ -294,7 +294,7 @@ npm run build
 - Comprehensive test coverage across backend and frontend.
 
 ### Intentionally Limited / Skipped Features (4-Hour Scope)
-- **Participant Deletion / Mutation**: In clinical trials, participant records are subject to strict regulatory retention (e.g. 21 CFR Part 11). Direct deletion without an immutable audit trail was intentionally excluded.
+- **Participant Update/Delete**: These operations were optional in the challenge and were intentionally left out to prioritize authentication, participant creation/retrieval, metrics, testing, documentation, and containerization within the 4-hour scope. In a production clinical system, mutation workflows would also require appropriate auditability and retention controls.
 - **Alembic Database Migrations**: `Base.metadata.create_all()` is used for local zero-config evaluation. Production would utilize formal migration scripts.
 - **Refresh Tokens / Token Blacklisting**: Standard 60-minute Bearer JWTs are used for simplicity.
 
@@ -328,7 +328,11 @@ A recommended GitHub Actions workflow would include:
 
 ## AI Usage Disclosure
 
-AI coding assistants (GitHub Copilot) were utilized during the development of this challenge for boilerplate scaffolding, test fixture generation, and TypeScript interface synchronization. All business logic, architectural designs, security constraints, and validation boundaries were guided and verified by the engineer.
+AI coding assistants (such as GitHub Copilot) were used during development to accelerate routine tasks such as initial scaffolding, boilerplate generation, test fixture creation, debugging support, and documentation review.
+
+The application architecture, technology choices, API design, authentication model, validation rules, security decisions, scope trade-offs, debugging decisions, and final verification were reviewed and owned by the candidate.
+
+AI-generated suggestions were treated as implementation assistance rather than accepted blindly. The final solution was tested end-to-end, reviewed against the challenge requirements, and the candidate is prepared to explain the implementation and reasoning behind each major technical decision.
 
 ---
 
