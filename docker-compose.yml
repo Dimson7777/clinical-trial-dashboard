@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: clinical-trial-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=dev-secret-key-challenge-2026-production-ready
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:5173,http://127.0.0.1:3000,http://127.0.0.1:5173
+      - LOG_LEVEL=INFO
+      - DEMO_USER_EMAIL=researcher@trial.dev
+      - DEMO_USER_PASSWORD=Demo1234!
+      - DATABASE_URL=sqlite:///./clinical_trial.db
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: clinical-trial-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
